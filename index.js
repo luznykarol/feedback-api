@@ -14,6 +14,16 @@ dotenv.config();
 //connect to db
 mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
 
+app.get("/", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    data: {
+      name: "name of your app",
+      version: "0.1.0",
+    },
+  });
+});
+
 //middlewares
 app.use(express.json());
 app.use(cors());
