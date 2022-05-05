@@ -11,7 +11,7 @@ const authRoute = require("./routes/auth");
 const tasksRoute = require("./routes/tasks");
 
 dotenv.config();
-a;
+
 //connect to db
 mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
 
