@@ -39,7 +39,7 @@ const connectDB = async () => {
   }
 };
 
-connectDB();
+app.use(connectDB());
 
 //route middlewares
 
