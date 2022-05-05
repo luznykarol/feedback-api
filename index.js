@@ -21,8 +21,6 @@ if (port == null || port == "") {
   port = 8000;
 }
 
-app.use("/tasks", tasksRoute);
-
 //route middlewares
 
 app.use("/api/user", authRoute);
