@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const port = process.env.PORT;
 
 //import routes
 const authRoute = require("./routes/auth");
@@ -22,6 +23,6 @@ app.use(cors());
 app.use("/api/user", authRoute);
 app.use("/api", tasksRoute);
 
-app.listen(3001, () => console.log("SERVER RUNNING"));
+app.listen(process.env.PORT || 3001);
 
 console.log("app", app);
