@@ -17,9 +17,6 @@ mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
 //middlewares
 app.use(express.json());
 app.use(cors());
-if (port == null || port == "") {
-  port = 8000;
-}
 
 //route middlewares
 
