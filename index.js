@@ -17,11 +17,27 @@ mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
 
 //middlewares
 app.use(express.json());
-app.use(cors());
+// cors origin URL - Allow inbound traffic from origin
+corsOptions = {
+  origin: "https://taskbakend.herokuapp.com/",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
-app.listen(port, () => {
-  console.log("App is running on port " + port);
-});
+const db = process.env.MONGODB_URL;
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(db, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    });
+    console.log("MongoDB is Connected...");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
 
 //route middlewares
 
