@@ -1,41 +1,67 @@
 const router = require("express").Router();
-const verify = require("./verifyToken");
+const Task = require("../modules/Task");
 
-router.get("/", verify, (req, res) => {
-  res.json({
-    tasks: [
-      {
-        id: 1,
-        title: "Add tags for solutions",
-        category: "enhancement",
-        upvotes: 112,
-        status: "live",
-        description:
-          "Easier to search for solutions based on a specific stack.",
-        comments: [
-          {
-            id: 1,
-            content:
-              "Awesome idea! Trying to find framework-specific projects within the hubs can be tedious",
-            user: {
-              image: "../../assets/users/image-suzanne.jpg",
-              name: "Suzanne Chang",
-              username: "upbeat1811",
-            },
-          },
-          {
-            id: 2,
-            content:
-              "Please use fun, color-coded labels to easily identify them at a glance",
-            user: {
-              image: "../../assets/users/image-thomas.jpg",
-              name: "Thomas Hood",
-              username: "brawnybrave",
-            },
-          },
-        ],
-      },
-    ],
+//create new task
+router.post("/tasks", async (req, res) => {
+  const task = new Task({
+    title: req.body.title,
+    category: req.body.category,
+    description: req.body.description,
+    upvotes: req.body.upvotes,
+    comments: req.body.comments,
+    status: req.body.status,
+  });
+  try {
+    const savedTask = await task.save();
+    res.send({
+      id: task._id,
+      title: task.title,
+      category: task.category,
+      description: task.category,
+      upvotes: task.upvotes,
+      comments: task.comments,
+      status: task.status,
+    });
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
+//get tasks
+router.get("/tasks", async (req, res) => {
+  try {
+    const tasks = await Task.find();
+    res.json(tasks);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+//get specific task
+router.get("/tasks/:taskId", async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.taskId);
+    res.json(task);
+  } catch (err) {
+    console.log(error);
+  }
+});
+
+//delete specific task
+router.delete("/tasks/:taskId", async (req, res) => {
+  try {
+    const removedTask = await Task.remove({ _id: req.params.taskId });
+    res.json(removedTask);
+  } catch (err) {
+    console.log(error);
+  }
+});
+
+//update specific task
+router.put("/tasks/:taskId", async (req, res, next) => {
+  Task.findByIdAndUpdate(req.params.taskId, req.body, function (err, doc) {
+    if (err) return next(err);
+    res.json(doc);
   });
 });
 
