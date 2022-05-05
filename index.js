@@ -39,6 +39,8 @@ const connectDB = async () => {
   }
 };
 
+connectDB();
+
 //route middlewares
 
 app.use("/api/user", authRoute);
