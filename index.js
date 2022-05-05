@@ -23,6 +23,6 @@ app.use(cors());
 app.use("/api/user", authRoute);
 app.use("/api", tasksRoute);
 
-app.listen(80 || 3001);
+app.listen(port || 3001);
 
 console.log("app", app);
