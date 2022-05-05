@@ -13,6 +13,7 @@ router.post("/tasks", async (req, res) => {
   });
   try {
     const savedTask = await task.save();
+
     res.send({
       id: task._id,
       title: task.title,
@@ -43,7 +44,7 @@ router.get("/tasks/:taskId", async (req, res) => {
     const task = await Task.findById(req.params.taskId);
     res.json(task);
   } catch (err) {
-    console.log(error);
+    console.log(err);
   }
 });
 
@@ -53,7 +54,7 @@ router.delete("/tasks/:taskId", async (req, res) => {
     const removedTask = await Task.remove({ _id: req.params.taskId });
     res.json(removedTask);
   } catch (err) {
-    console.log(error);
+    console.log(err);
   }
 });
 
