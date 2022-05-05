@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luznykarol/feedback-api.git"
+    "url": "git+https://github.com/luznykarol/feedbackapp-api.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/luznykarol/feedback-api/issues"
+    "url": "https://github.com/luznykarol/feedbackapp-api/issues"
   },
-  "homepage": "https://github.com/luznykarol/feedback-api#readme",
+  "homepage": "https://github.com/luznykarol/feedbackapp-api#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
