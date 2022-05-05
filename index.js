@@ -14,23 +14,6 @@ dotenv.config();
 //connect to db
 mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
 
-app.get("/", (req, res, next) => {
-  try {
-    console.log("WORKING");
-  } catch (err) {
-    res.json(err);
-  }
-});
-
-// app.get('/tasks', (req, res, next) => {
-//   try {
-//     const tasks = await Task.find();
-//     res.json(tasks);
-//   } catch (err) {
-//     res.json(err);
-//   }
-// });
-
 //middlewares
 app.use(express.json());
 app.use(cors());
