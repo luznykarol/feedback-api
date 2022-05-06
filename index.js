@@ -13,7 +13,12 @@ const tasksRoute = require("./routes/tasks");
 dotenv.config();
 
 //connect to db
-mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
+// mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
+mongoose.connect(process.env.DB_CONNECT, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+});
+console.log("MongoDB is Connected...");
 
 //middlewares
 app.use(express.json());
@@ -26,20 +31,20 @@ app.use(cors(corsOptions));
 
 const db = process.env.MONGODB_URL;
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.DB_CONNECT, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    });
-    console.log("MongoDB is Connected...");
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
+// const connectDB = async () => {
+//   try {
+//     await mongoose.connect(process.env.DB_CONNECT, {
+//       useUnifiedTopology: true,
+//       useNewUrlParser: true,
+//     });
+//     console.log("MongoDB is Connected...");
+//   } catch (err) {
+//     console.error(err.message);
+//     process.exit(1);
+//   }
+// };
 
-app.use(connectDB());
+// app.use(connectDB());
 
 //route middlewares
 
