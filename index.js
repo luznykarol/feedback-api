@@ -13,15 +13,17 @@ const tasksRoute = require("./routes/tasks");
 dotenv.config();
 
 //connect to db
-// mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
+
 mongoose.connect(process.env.DB_CONNECT, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
 console.log("MongoDB is Connected...");
+// mongoose.connect(process.env.DB_CONNECT, () => console.log("connected "));
 
 //middlewares
 app.use(express.json());
+
 // cors origin URL - Allow inbound traffic from origin
 corsOptions = {
   origin: "https://taskbakend.herokuapp.com/",
@@ -29,28 +31,11 @@ corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const db = process.env.MONGODB_URL;
-
-// const connectDB = async () => {
-//   try {
-//     await mongoose.connect(process.env.DB_CONNECT, {
-//       useUnifiedTopology: true,
-//       useNewUrlParser: true,
-//     });
-//     console.log("MongoDB is Connected...");
-//   } catch (err) {
-//     console.error(err.message);
-//     process.exit(1);
-//   }
-// };
-
-// app.use(connectDB());
-
 //route middlewares
 
 app.use("/api/user", authRoute);
 app.use("/api", tasksRoute);
 
-app.listen(3001, () => console.log("SERVER RUNNING"));
+app.listen(port, () => console.log("SERVER RUNNING"));
 
 console.log("app", app);
